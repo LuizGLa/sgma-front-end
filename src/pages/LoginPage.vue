@@ -48,15 +48,16 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { QIcon } from 'quasar';
+import { QIcon, useQuasar, Notify } from 'quasar';
 import axios from 'axios';
 
 export default defineComponent({
   name: 'LoginPage',
   components: {
-    QIcon,
+    QIcon, Notify
   },
   data() {
+    const $q = useQuasar()
     return {
       email: ' ',
       password: ' ',
@@ -86,11 +87,21 @@ export default defineComponent({
           this.emailError = true;
           this.passwordError = true;
           console.error('Falha no login: Credenciais inválidas');
+          Notify.create({ 
+            type: 'negative', 
+            message: 'Falha no login: Credenciais inválidas',
+            position:'top'
+             })
+          // $q.notify({
+          // type: 'negative',
+          // message: 'This is a "negative" type notification.'
+        // })
         }
       } catch (error) {
         console.error('Falha no login:', error);
       }
     },
+    
   },
 });
 </script>

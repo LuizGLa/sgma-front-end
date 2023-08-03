@@ -91,24 +91,25 @@ module.exports = configure(function (/* ctx */) {
       open: true // opens browser window automatically
     },
 
-    // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
-    // framework: {
-    //   config: {
-    //     brand: {
-    //       primary: '#1d476e',
-    //       secondary: '#26A69A',
-    //       accent: '#9C27B0',
-  
-    //       dark: '#1d1d1d',
-    //       'dark-page': '#121212',
-  
-    //       positive: '#21BA45',
-    //       negative: '#C10015',
-    //       info: '#31CCEC',
-    //       warning: '#F2C037'
-    //     }
-    //   }
-    // },
+    // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
+    framework: {
+      config: {},
+      lang: "pt-BR",
+      cssAddon: true,
+
+      // iconSet: 'material-icons', // Quasar icon set
+      // lang: 'en-US', // Quasar language pack
+
+      // For special cases outside of where the auto-import strategy can have an impact
+      // (like functional components as one of the examples),
+      // you can manually specify Quasar components/directives to be available everywhere:
+      //
+      // components: [],
+      // directives: [],
+
+      // Quasar plugins
+      plugins: ["Notify", "LocalStorage","SessionStorage", "Loading", "Dialog"],
+    },
 
     // animations: 'all', // --- includes all animations
     // https://v2.quasar.dev/options/animations
