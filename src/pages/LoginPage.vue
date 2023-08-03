@@ -1,15 +1,15 @@
 <template>
   <q-page class="flex flex-center column" id="background-full">
     <div class="card-login">
-      <q-img src="src/assets/Logo-SGMA.png" width="230px" height="200px"></q-img>
-
-      <q-input filled type="email" v-model="email" :dense="dense" placeholder="Email" :rules="[emailRule]">
+      <q-img src="src/assets/Logo-SGMA.png" ></q-img>
+ 
+      <q-input filled type="email" v-model="email" :dense="dense" placeholder="Email" :rules="[emailRule]" :error="emailError">
         <template v-slot:append>
           <q-icon name="email" />
         </template>
       </q-input>
 
-      <q-input filled v-model="password" :dense="dense" type="password" placeholder="Senha">
+      <q-input filled v-model="password" :dense="dense" type="password" placeholder="Senha" :error="passwordError">
         <template v-slot:append>
           <q-icon name="vpn_key" />
         </template>
@@ -21,11 +21,17 @@
 </template>
 
 <style scoped>
+ 
+.q-img{
+  width:"230px";
+  height:"200px";
+  filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.5))
+}
 .card-login {
   max-width: 400px; /* Definindo uma largura máxima para o card */
   margin: 20px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.842);
+  background: linear-gradient( to bottom, rgb(255, 255, 255), rgb(183, 191, 207));
   border-radius: 10px;
   box-shadow: 0 4px 11px rgba(0, 0, 0, 0.651);
 }
@@ -52,13 +58,15 @@ export default defineComponent({
   },
   data() {
     return {
-      email: '',
-      password: '',
-      dense: false,
+      email: ' ',
+      password: ' ',
+      dense: true,
       emailRule: [
         (v) => !!v || 'Email é obrigatório',
         (v) => /.+@.+/.test(v) || 'Email deve ser válido',
       ],
+      emailError: false,
+      passwordError: false,
     };
   },
   methods: {
@@ -73,8 +81,10 @@ export default defineComponent({
           this.$router.push('/');
           console.log('Login bem-sucedido.');
         } else {
-          this.email = '',
+          // this.email = '',
           this.password = ''
+          this.emailError = true;
+          this.passwordError = true;
           console.error('Falha no login: Credenciais inválidas');
         }
       } catch (error) {
