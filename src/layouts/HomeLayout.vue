@@ -2,14 +2,14 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar class="q-pa-md row items-center">
-        <q-btn
+        <!-- <q-btn
           flat
           dense
           round
           icon="menu"
           aria-label="Menu"
           @click="toggleLeftDrawer"
-          size="lg"/>
+          size="lg"/> -->
         <q-img
           src="src/assets/logoHeader.png"
           width="164px"
