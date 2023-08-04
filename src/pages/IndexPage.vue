@@ -1,9 +1,11 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center column">
     
+   <div class="container">
     <q-card
       class="my-card text-white"
       style="background: radial-gradient(circle, #1d6eb4 0%, #012c52 100%)"
+    
     >
       <q-card-section class="row">
         <q-icon name="person_outline" size="md" style="margin-right: 10px;"/>
@@ -22,7 +24,8 @@
       {{ totalAlunos }} 
       </div>
     </q-card>
-
+    <q-btn label="Gerenciar alunos" to="/alunos" type="send" color="primary" class="q-field button-alunos" />
+  </div> 
   </q-page>
 </template>
 
@@ -32,8 +35,14 @@
  background: linear-gradient( to top, rgb(255, 255, 255), rgba(121, 143, 185, 0.527));
  }
 
-</style>
+ .button-alunos {
+  width: 100%; 
+  margin-top: 5px;
 
+}
+
+</style>
+  
 <script>
 
 import axios from 'axios';

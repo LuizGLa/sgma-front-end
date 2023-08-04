@@ -16,6 +16,13 @@ const routes = [
     ]
   },
 
+  {
+    path: '/alunos',
+    component: () => import('layouts/AlunoLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/CadastroAlunos.vue') }
+    ]
+  },
   
 
   // Always leave this as last one,
