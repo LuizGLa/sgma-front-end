@@ -31,6 +31,23 @@
         
       </template>
     </q-table>
+    <div class="cadastro flex flex-center" style="margin-top: 10px;">
+      <q-btn icon="add" label="Novo aluno" color="primary" @click="toggleCadastro" />
+    </div>
+
+    <div v-if="cadastroVisible" style="margin-top: 20px; box-shadow: 0px 0px 10px rgba(0, 1, 5, 0.356);">
+      <q-card class="q-mb-md">
+        <q-card-section>
+          <q-input v-model="nome" label="Nome" />
+          <q-input v-model="cpf" label="CPF" />
+          <q-input v-model="dataNascimento" label="Data de Nascimento" type="date" mask="####-##-##" />
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn label="Cancelar" color="negative" @click="cancelCadastro" />
+          <q-btn label="Cadastrar" color="primary" @click="cadastrarAluno" />
+        </q-card-actions>
+      </q-card>
+    </div>
   </q-page>
 </template>
 
@@ -70,12 +87,18 @@
   <script>
   import axios from 'axios';
   
+  
 
   
   export default {
+  
     data() {
       return {
         alunos: [],
+        cadastroVisible: false,
+        nome: '',
+        cpf: '',
+        dataNascimento: '',
         columns: [
           {
             name: 'name',
@@ -121,6 +144,33 @@
       this.fetchAlunos();
     },
     methods: {
+      toggleCadastro() {
+      this.cadastroVisible = !this.cadastroVisible;
+      this.clearCadastroFields();
+    },
+    clearCadastroFields() {
+      this.nome = '';
+      this.cpf = '';
+      this.dataNascimento = '';
+    },
+    cancelCadastro() {
+      this.cadastroVisible = false;
+      this.clearCadastroFields();
+    },
+    async cadastrarAluno() {
+      const novoAluno = {
+        name: this.nome,
+        cpf: this.cpf,
+        dateBirth: this.dataNascimento,
+      };
+      try {
+        await axios.post('http://localhost:3000/alunos', novoAluno);
+        this.alunos.push(novoAluno);
+        this.cancelCadastro();
+      } catch (error) {
+        console.error('Erro ao cadastrar aluno:', error);
+      }
+    },
       async fetchAlunos() {
         try {
           const response = await axios.get('http://localhost:3000/alunos');
@@ -139,7 +189,15 @@
       },
       editAluno(id) {
         // Implementar a lógica para editar o aluno com o ID fornecido
-      }
+      },
+      openCadastroDialog() {
+      this.cadastroDialogVisible = true;
+      console.log("teste")
+    },
+    alunoCadastrado(novoAluno) {
+      this.alunos.push(novoAluno);
+      console.log("teste")
+    }
     }
   };
   </script>
