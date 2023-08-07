@@ -5,7 +5,7 @@
     style=" font-family: Lexend; color: #0a2e52">
       Alunos Cadastrados
     </div>
-
+   <div class="areaTable flex flex-center">
     <q-table
       :rows="alunos"
       :columns="columns"
@@ -13,33 +13,57 @@
       class="my-sticky-header-table q-table__middle"
     >
       <template v-slot:body-cell-actions="props">
-        <div class="actions flex flex-center" style="margin-top: 10px;">
+        <div class="actions flex flex-center" style="margin-top: 10px; ">
           <q-btn
-            icon="edit"
-            color="primary"
+            icon="update"
+            color="warning"
             @click="editAluno(props.row.id)"
             style="margin-right: 5px;"
             size="sm"
-          />
+            > 
+            <q-tooltip 
+            v-if="showTooltip">
+            {{ attAl }}
+            </q-tooltip>
+           </q-btn>
+          <q-btn
+            icon="add"
+            color="primary"
+            @click="addModulo(props.row.id)"
+            style="margin-right: 5px;"
+            size="sm"
+            > 
+            <q-tooltip 
+            v-if="showTooltip">
+            {{ addMd }}
+            </q-tooltip>
+           </q-btn>
           <q-btn
             icon="delete"
             color="negative"
             @click="deleteAluno(props.row.id)"
             size="sm"
-          />
+          >
+          <q-tooltip 
+            v-if="showTooltip">
+            {{ delAl }}
+           </q-tooltip>
+          </q-btn>
           </div>
         
       </template>
     </q-table>
+  </div>
     <div class="cadastro flex flex-center" style="margin-top: 10px;">
       <q-btn icon="add" label="Novo aluno" color="primary" @click="toggleCadastro" />
     </div>
 
-    <div v-if="cadastroVisible" style="margin-top: 20px; box-shadow: 0px 0px 10px rgba(0, 1, 5, 0.356);">
+    <div class="conatiner flex flex-center">
+    <div v-if="cadastroVisible" style="width: 600px; height: 250px; margin-top: 20px; box-shadow: 0px 0px 10px rgba(0, 1, 5, 0.356);">
       <q-card class="q-mb-md">
-        <q-card-section>
+        <q-card-section >
           <q-input v-model="nome" label="Nome" />
-          <q-input v-model="cpf" label="CPF" />
+          <q-input v-model="cpf" label="CPF" mask="###.###.###-##"/>
           <q-input v-model="dataNascimento" label="Data de Nascimento" type="date" mask="####-##-##" />
         </q-card-section>
         <q-card-actions align="right">
@@ -48,6 +72,7 @@
         </q-card-actions>
       </q-card>
     </div>
+  </div>
   </q-page>
 </template>
 
@@ -55,7 +80,8 @@
 
 .my-sticky-header-table
   /* height or max-height is important */
-  height: 310px
+  height: 400px
+  width: 1800px
 
   .q-table__top,
   .q-table__bottom,
@@ -99,6 +125,10 @@
         nome: '',
         cpf: '',
         dataNascimento: '',
+        showTooltip: true,
+        addMd: "Adicionar módulo",
+        delAl: "Remover aluno",
+        attAl: "Atualizar aluno",
         columns: [
           {
             name: 'name',
@@ -187,9 +217,15 @@
           console.error('Erro ao deletar aluno:', error);
         }
       },
+
       editAluno(id) {
-        // Implementar a lógica para editar o aluno com o ID fornecido
+
       },
+
+      addModulo(id) {
+        // Implementar a lógica para modulo ao aluno com o ID fornecido
+      },
+      
       openCadastroDialog() {
       this.cadastroDialogVisible = true;
       console.log("teste")
