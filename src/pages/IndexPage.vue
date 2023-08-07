@@ -13,7 +13,7 @@
 
         <div 
          class="text-h5"
-         style=" font-family: Lexend;"> 
+         style=" font-family: Lexend;">
          Alunos Cadastrados: 
         </div>
          
@@ -29,7 +29,7 @@
   </q-page>
 </template>
 
-<style scoped>
+<style>
  @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@900&display=swap');
  .q-page {
  background: linear-gradient( to top, rgb(255, 255, 255), rgba(121, 143, 185, 0.527));

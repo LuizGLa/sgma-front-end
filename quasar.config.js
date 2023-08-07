@@ -60,6 +60,15 @@ module.exports = configure(function (/* ctx */) {
         node: 'node16'
       },
 
+      chainWebpack(chain) {
+        chain.module
+          .rule('sass')
+          .test(/\.s[ac]ss$/i)
+          .use('sass-loader')
+          .loader('sass-loader')
+          .end();
+      },
+
       vueRouterMode: 'hash', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,

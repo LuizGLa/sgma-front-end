@@ -15,6 +15,7 @@
           width="164px"
           height="60px"
           class="q-mx-auto"
+          to="/alunos"
         />
       </q-toolbar>
     </q-header>
