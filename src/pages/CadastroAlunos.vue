@@ -63,7 +63,7 @@
       <q-card class="q-mb-md">
         <q-card-section >
           <q-input v-model="nome" label="Nome" />
-          <q-input v-model="cpf" label="CPF" mask="###.###.###-##"/>
+          <q-input v-model="cpf" label="CPF"/>
           <q-input v-model="dataNascimento" label="Data de Nascimento" type="date" mask="####-##-##" />
         </q-card-section>
         <q-card-actions align="right">
